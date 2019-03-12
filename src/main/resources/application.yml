@@ -4,6 +4,20 @@ spring:
     username: root
     password: Chobit@666
     driver-class-name: com.mysql.jdbc.Driver
+# MyBatis
+mybatis:
+    typeAliasesPackage: com.zhoubi.graindepot.bean
+    mapperLocations: classpath:mapper/**/*.xml
+
+# 日志配置
+logging:
+  level:
+    org.apache.ibatis: DEBUG
+
+# ureport Mysql 存储
+ureport.mysql.provider:
+  prefix: chobit-
+  disabled: false
 server:
     port: 8007 #
     #context-path: /graindepot-report

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhoubi.graindepot.mapper.UreportFileMapper">
+
+    <resultMap type="UreportFileEntity" id="ureportFile">
+        <id column="ureportid" jdbcType="INTEGER" property="ureportid"/>
+        <result column="ureportname" jdbcType="VARCHAR" property="ureportname"/>
+        <result column="content" jdbcType="BLOB" property="content"/>
+        <result column="createtime" jdbcType="DATE" property="createtime"/>
+        <result column="updatetime" jdbcType="DATE" property="updatetime"/>
+    </resultMap>
+
+    <select id="checkExistByName" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from ureport_file_tbl where ureportname = #{ureportname}
+    </select>
+
+    <select id="queryReportFileList" resultMap="ureportFile">
+        select * from ureport_file_tbl
+    </select>
+
+    <select id="queryUreportFileEntityByName" resultMap="ureportFile">
+        select * from ureport_file_tbl where ureportname = #{ureportname}
+    </select>
+
+    <delete id="deleteReportFileByName" parameterType="java.lang.String">
+        delete from ureport_file_tbl where ureportname = #{ureportname}
+    </delete>
+
+    <insert id="insertReportFile" parameterType="UreportFileEntity">
+        insert into ureport_file_tbl (ureportname, content, createtime, updatetime) values
+        (#{ureportname}, #{content}, #{createtime}, #{updatetime})
+    </insert>
+
+
+    <update id="updateReportFile" parameterType="UreportFileEntity">
+        update ureport_file_tbl set
+        ureportname = #{ureportname} ,
+        content = #{content},
+        createtime = #{createtime},
+        updatetime = #{updatetime}
+        where  ureportid = #{ureportid}
+    </update>
+
+</mapper> 
